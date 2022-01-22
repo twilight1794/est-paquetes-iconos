@@ -1,0 +1,5 @@
+* Español
+En este repositorio se guarda el histórico de las estadísticas sobre la inclusión de iconos en varios paquetes de iconos libres para Android. Estos datos son generados semanalmente, en formato JSON, para ser procesados fácilmente. Los datos, así como el programa web, están bajo la licencia [[https://creativecommons.org/licenses/by/4.0/][Creative Commons Atribución 4.0 Internacional]].
+
+* English
+In this repository are stored the history of the statistics about the icon inclusion on many FLOSS icon packs for Android. The data is generated weekly, in JSON format, in order to be easily processed. The data and the webapp are under the [[https://creativecommons.org/licenses/by/4.0/][Creative Commons Attribution 4.0 International]] license.
