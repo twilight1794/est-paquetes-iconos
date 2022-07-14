@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
+  <head>
+    <title>Estado de desarrollo de paquetes de íconos para Android</title>
+    <meta property="dc:author" content="Giovanni Alfredo Garciliano Díaz" />
+    <meta property="sitemap:changefreq" content="weekly" />
+    <style>/*<![CDATA[*/
+*{margin:0;padding:0;box-sizing: border-box;}
+body>*{
+  max-width: 600px;
+  margin: 0 auto;
+}
+/*
+:not(:checked)+dl>dt {
+  font-weight: bold;
+  display: inline;
+}
+:not(:checked)+dl>dt::after {
+  content: ': ';
+}
+:not(:checked)+dl>dd {
+  margin-left: 0;
+  display: inline;
+}
+:not(:checked)+dl>dd::after {
+  content: '\a';
+  white-space: pre;
+}
+:not(:checked)+dl a {
+  font-size: 0px;
+  text-decoration: none;
+}
+:not(:checked)+dl dl {
+  display: inline;
+}
+:not(:checked)+dl dl dt {
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+:not(:checked)+dl dl dd {
+  display: inline;
+  margin-left: 0;
+}
+:not(:checked)+dl dl dd:nth-of-type(1) a::after {
+  font-size: 1rem;
+  content: "F-Droid";
+}
+:not(:checked)+dl dl dd:nth-of-type(2) a::before {
+  font-size: 1rem;
+  content: " • ";
+  color: initial;
+}
+:not(:checked)+dl dl dd:nth-of-type(2) a::after {
+  font-size: 1rem;
+  content: "appfilter.xml";
+}
+:not(:checked)+dl dl {
+  margin: auto 0; 
+}*/
+    /*]]>*/</style>
+    <script>//<![CDATA[
+function procesar(){
+  var o = this.response;
+  for (let k_repo of Object.keys(o).sort()){
+    var enc = document.createElement("h2");
+    enc.textContent = k_repo;
+    enc.id = k_repo;
+    var tabla = document.createElement("table");
+    var f = document.createDocumentFragment();
+    for (let k_package of Object.keys(o[k_repo]).sort()){
+      for (let k_activity of Object.keys(o[k_repo][k_package]).sort()){
+        var fila = document.createElement("tr");
+        var celdat = document.createElement("th");
+        celdat.innerHTML = "<span class=\"pkg\">" + k_package + "</span>/<span class=\"act\">" + k_activity + "</span>";
+        celdat.scope = "row";
+        var ff = document.createElementFragment();
+        for (let k_pack of Object.keys(o[k_repo][k_package][k_activity]).sort()){
+          var celdav = document.createElement("td");
+          celdav.textContent = o[k_repo][k_package][k_activity]?"✓":"✗";
+          ff.appendChild(celdav);
+        }
+        f.appendChild(fila);
+      }
+    }
+    tabla.appendChild(f);
+    document.querySelector("footer").before(enc, tabla);
+  }
+}
+
+document.addEventListener("load", function(){
+  var a = new XMLHttpRequest();
+  a.open("GET", "https://gitlab.com/twilight1794/est-paquetes-iconos/-/raw/main/json/latest.json");
+  a.addEventListener("load", procesar);
+  a.send();
+});
+//]]></script>
+  </head>
+  <body>
+    <h1>Estado de desarrollo de paquetes de íconos para Android</h1>
+    <p>Aquí se compara la inclusión de actividades entre varios paquetes de íconos disponibles en el repositorio oficial de F-Droid. Cada sección compara en una tabla las actividades de un paquete proveniente de una fuente específica. La tabla muestra todas las actividades agrupadas por paquete.</p>
+    <footer>
+      <p>Hecho con ❤&#xfe0f; por Giovanni Alfredo Garciliano Díaz.</p>
+      <p>Contenido bajo la licencia <a href="https://creativecommons.org/licenses/by/4.0/" hreflang="en" rel="license">Creative Commons Atribución 4.0 Internacional</a>.</p>
+      <img src="http://www.w3.org/Icons/valid-xml10" alt="XML 1.0 válido" />
+      <img src="http://www.w3.org/Icons/valid-css" alt="CSS válido" />
+    </footer>
+  </body>
+</html>

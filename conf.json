@@ -1,0 +1,15 @@
+{
+  "repos": {
+    "fdroid": [ "F-Droid", "https://f-droid.org/repo/index.xml" ],
+    "guardian": [ "Guardian Project", "https://guardianproject.info/fdroid/repo/index.xml" ],
+    "izzy": [ "IzzyOnDroid", "https://apt.izzysoft.de/fdroid/repo/index.xml" ],
+    "kde": [ "KDE", "https://cdn.kde.org/android/stable-releases/fdroid/repo/index.xml" ],
+    "microg": [ "MicroG", "https://microg.org/fdroid/repo/index.xml" ]
+  },
+  "packs": {
+    "ameixa": [ "Ameixa", "https://gitlab.com/xphnx/ameixa/-/raw/master/app/src/main/res/xml/appfilter.xml" ],
+    "arcticons": [ "Arcticons", "https://raw.githubusercontent.com/Donnnno/Arcticons/main/app/src/main/res/xml/appfilter.xml" ],
+    "frost": [ "Frost", "https://raw.githubusercontent.com/dkanada/frost/master/app/src/main/res/xml/appfilter.xml" ],
+    "mbe": [ "MBE Style", "https://raw.githubusercontent.com/meolunr/MBEStyle/master/app/src/main/res/xml/appfilter.xml" ]
+  }
+}
