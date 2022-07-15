@@ -78,7 +78,7 @@ function procesar(){
         var celdat = document.createElement("th");
         celdat.innerHTML = "<span class=\"pkg\">" + k_package + "</span>/<span class=\"act\">" + k_activity + "</span>";
         celdat.scope = "row";
-        var ff = document.createElementFragment();
+        var ff = document.createDocumentFragment();
         for (let k_pack of Object.keys(o[k_repo][k_package][k_activity]).sort()){
           var celdav = document.createElement("td");
           celdav.textContent = o[k_repo][k_package][k_activity]?"✓":"✗";
