@@ -65,7 +65,7 @@ body>*{
     /*]]>*/</style>
     <script>//<![CDATA[
 function procesar(){
-  var o = this.response;
+  var o = JSON.parse(this.responseText);
   for (let k_repo of Object.keys(o).sort()){
     var enc = document.createElement("h2");
     enc.textContent = k_repo;
