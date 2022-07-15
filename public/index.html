@@ -94,7 +94,7 @@ function procesar(){
 
 document.addEventListener("load", function(){
   var a = new XMLHttpRequest();
-  a.open("GET", "https://gitlab.com/twilight1794/est-paquetes-iconos/-/raw/main/json/latest.json");
+  a.open("GET", "latest.json");
   a.addEventListener("load", procesar);
   a.send();
 });
