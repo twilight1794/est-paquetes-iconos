@@ -7,61 +7,39 @@
     <meta property="sitemap:changefreq" content="weekly" />
     <style>/*<![CDATA[*/
 *{margin:0;padding:0;box-sizing: border-box;}
-body>*{
-  max-width: 600px;
+body{
+  background-color: #DFDBE5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%239C92AC' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+}
+h2{ margin: 1rem; }
+p{ margin: 1rem; }
+table{
   margin: 0 auto;
+  border-collapse: collapse;
 }
-/*
-:not(:checked)+dl>dt {
+tr, td { background-color: white; }
+thead tr{
+  font-family: sans-serif;
+  position: sticky;
+  top: 0;
+}
+thead th{
+  padding-bottom: .5rem;
+}
+thead th:not(:first-child){
+  writing-mode: vertical-rl;
+  vertical-align: bottom;
+}
+.pkg{ display: none; }
+.subt .pkg { display: block; }
+.sep{ display: none; }
+.act{ font-weight: normal; }
+td{
   font-weight: bold;
-  display: inline;
+  vertical-align: bottom;
 }
-:not(:checked)+dl>dt::after {
-  content: ': ';
-}
-:not(:checked)+dl>dd {
-  margin-left: 0;
-  display: inline;
-}
-:not(:checked)+dl>dd::after {
-  content: '\a';
-  white-space: pre;
-}
-:not(:checked)+dl a {
-  font-size: 0px;
-  text-decoration: none;
-}
-:not(:checked)+dl dl {
-  display: inline;
-}
-:not(:checked)+dl dl dt {
-  clip-path: inset(50%);
-  height: 1px;
-  overflow: hidden;
-  position: absolute;
-  white-space: nowrap;
-  width: 1px;
-}
-:not(:checked)+dl dl dd {
-  display: inline;
-  margin-left: 0;
-}
-:not(:checked)+dl dl dd:nth-of-type(1) a::after {
-  font-size: 1rem;
-  content: "F-Droid";
-}
-:not(:checked)+dl dl dd:nth-of-type(2) a::before {
-  font-size: 1rem;
-  content: " • ";
-  color: initial;
-}
-:not(:checked)+dl dl dd:nth-of-type(2) a::after {
-  font-size: 1rem;
-  content: "appfilter.xml";
-}
-:not(:checked)+dl dl {
-  margin: auto 0; 
-}*/
+td[content=true]{ color: green; }
+td[content=false]{ color: red; }
     /*]]>*/</style>
     <script>//<![CDATA[
 function procesar(){
@@ -71,23 +49,41 @@ function procesar(){
     enc.textContent = k_repo;
     enc.id = k_repo;
     var tabla = document.createElement("table");
+    var enct = document.createElement("thead");
     var f = document.createDocumentFragment();
+    var antact = "";
     for (let k_package of Object.keys(o[k_repo]).sort()){
       for (let k_activity of Object.keys(o[k_repo][k_package]).sort()){
+        if (enct.childElementCount == 0){
+          var enctc = "<tr><th>Actividades</th>";
+          for (let k of Object.keys(o[k_repo][k_package][k_activity]).sort()){
+            enctc += "<th>"+k+"</th>";
+          }
+          enct.innerHTML = enctc+"</tr>";
+        }
         var fila = document.createElement("tr");
+        if (antact != k_package){
+          fila.className = "subt";
+          antact = k_package;
+        }
         var celdat = document.createElement("th");
-        celdat.innerHTML = "<span class=\"pkg\">" + k_package + "</span>/<span class=\"act\">" + k_activity + "</span>";
+        var nom = "<span class=\"pkg\">" + k_package + "</span>";
+        if (k_activity != "_") nom += "<span class=\"sep\">/</span><span class=\"act\">" + k_activity + "</span>";
+        celdat.innerHTML = nom;
         celdat.scope = "row";
         var ff = document.createDocumentFragment();
         for (let k_pack of Object.keys(o[k_repo][k_package][k_activity]).sort()){
           var celdav = document.createElement("td");
-          celdav.textContent = o[k_repo][k_package][k_activity]?"✓":"✗";
+          celdav.textContent = o[k_repo][k_package][k_activity][k_pack]?"✓":"✗";
+          celdav.setAttribute("content", (o[k_repo][k_package][k_activity][k_pack]?"true":"false"));
           ff.appendChild(celdav);
         }
+        fila.appendChild(celdat);
+        fila.appendChild(ff);
         f.appendChild(fila);
       }
     }
-    tabla.appendChild(f);
+    tabla.append(enct, f);
     document.querySelector("footer").before(enc, tabla);
   }
 }
