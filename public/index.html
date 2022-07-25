@@ -2,17 +2,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
   <head>
     <title>Estado de desarrollo de paquetes de íconos para Android</title>
-    <meta property="sitemap:changefreq" content="weekly" />
+    <meta property="sitemap:changefreq" content="monthly" />
     <meta name="viewport" content="width=device-width; initial-scale=1.0" />
     <meta charset="utf-8" />
     <style>/*<![CDATA[*/
-*{margin:0;padding:0;box-sizing: border-box;}
-body{
+*{margin:0;padding:0;box-sizing:border-box;}
+body {
   background-color: #DFDBE5;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%239C92AC' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
 }
-h2,p { margin: 1rem; }
-table{
+h2 a {
+  color: gray;
+  text-decoration: none;
+  margin-left: .5rem;
+}
+h2 a:hover { text-decoration: underline; }
+h2, p, details, footer { margin: 1rem; }
+table {
   margin: 0 auto;
   border-collapse: collapse;
 }
@@ -22,18 +28,16 @@ thead tr{
   position: sticky;
   top: 0;
 }
-thead th{
-  padding-bottom: .5rem;
-}
+thead th { padding-bottom: .5rem; }
 thead th:not(:first-child){
   writing-mode: vertical-rl;
   vertical-align: bottom;
 }
-.pkg{ display: none; }
+.pkg { display: none; }
 .subt .pkg { display: block; }
-.sep{ display: none; }
-.act{ font-weight: normal; }
-td{
+.sep { display: none; }
+.act { font-weight: normal; }
+td {
   font-weight: bold;
   vertical-align: bottom;
 }
@@ -47,6 +51,10 @@ function procesar(){
     var enc = document.createElement("h2");
     enc.textContent = k_repo;
     enc.id = k_repo;
+    var lnk = document.createElement("a");
+    lnk.href = "#"+k_repo;
+    lnk.textContent = "#";
+    enc.appendChild(lnk);
     var tabla = document.createElement("table");
     var enct = document.createElement("thead");
     var f = document.createDocumentFragment();
@@ -97,7 +105,12 @@ window.addEventListener("load", function(){
   </head>
   <body>
     <h1>Estado de desarrollo de paquetes de íconos para Android</h1>
-    <p>Aquí se compara la inclusión de actividades entre varios paquetes de íconos disponibles en el repositorio oficial de F-Droid. Cada sección compara en una tabla las actividades de un paquete proveniente de una fuente específica. La tabla muestra todas las actividades agrupadas por paquete.</p>
+    <details><summary>Español</summary>
+      <p>Las siguientes tablas comparan las actividades incluidas en algunos paquetes de íconos disponibles en el repositorio oficial de F-Droid. Cada tabla lista todos los paquetes de un repositorio específico, y cada paquete agrupa todas las actividades que existen en al menos un paquete de íconos. Los paquetes que no tienen ninguna actividad en algún paquete de íconos no incluyen actividades.</p>
+    </details>
+    <details lang="en" xml:lang="en"><summary>English</summary>
+      <p>The following tables compare the activities included in some icon packs available in the official F-Droid repository. Each table lists all the packages included in a specific repository, and each package groups all the activities that exist in at least one icon pack. Packages that don't have any activities in any icon pack don't include activities.</p>
+    </details>
     <footer>
       <p>Hecho con ❤&#xfe0f; por <span property="dc:author">Giovanni Alfredo Garciliano Díaz.</span></p>
       <p>Contenido bajo la licencia <a href="https://creativecommons.org/licenses/by/4.0/" hreflang="en" rel="license">Creative Commons Atribución 4.0 Internacional</a>.</p>
